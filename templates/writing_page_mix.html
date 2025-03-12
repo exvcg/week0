@@ -266,10 +266,10 @@
                 case 'h2': insertion = `## ${selectedText}`; cursorOffset = 3; break;
                 case 'h3': insertion = `### ${selectedText}`; cursorOffset = 4; break;
                 case 'h4': insertion = `#### ${selectedText}`; cursorOffset = 5; break;
-                case 'bold': insertion = `**{selectedText}**`; cursorOffset = 2; break;
-                case 'italic': insertion = `*{selectedText}*`; cursorOffset = 1; break;
-                case 'quote': insertion = `> {selectedText}`; cursorOffset = 2; break;
-                case 'code': insertion = `\`\`\`python\n${selectedText}\n\`\`\``; cursorOffset = 9; break;
+                case 'bold': insertion = `**${selectedText}**`; cursorOffset = 2; break;
+                case 'italic': insertion = `*${selectedText}*`; cursorOffset = 1; break;
+                case 'quote': insertion = `> ${selectedText}`; cursorOffset = 2; break;
+                case 'code': insertion = `\`\`\`python\n${selectedText}\n\`\`\``; cursorOffset = 10; break;
             } 
 
             newText = text.substring(0, start) + insertion + text.substring(end);
