@@ -131,7 +131,7 @@ def showmine(number):
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login_mine.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
+    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
 
 @app.route("/comment/<lid>", methods=['POST'])#댓글 구현
 @jwt_required()
