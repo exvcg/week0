@@ -89,12 +89,12 @@ def listup():
 @jwt_required()
 def showup(id):
     current_user = get_jwt_identity()
-    bbb = get_jwt_identity()
+    userd = db.users.find_one({"_id":ObjectId(current_user)})
     prb = list(db.til.find({"_id":ObjectId(id)}))
     cocom = list(db.ccc.find({'lid':id}))
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("article.html", cont = prb[0], comm = cocom,cvc = bbb,mst = len(dlist), rst = len(rlist))
+    return render_template("article.html", cont = prb[0], comm = cocom,cvc = current_user,mst = len(dlist), rst = len(rlist),ID = userd["user_id"])
 @app.route("/main")
 @jwt_required()
 def main():
@@ -103,7 +103,7 @@ def main():
     elist = list(db.til.find().sort({'month':-1,'day':-1}))
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = elist,username = userd["user_id"],mst = len(dlist), rst = len(rlist))    
+    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))    
 @app.route("/showlist", methods=['GET'])#게시물리스트 가져오기
 @jwt_required()
 def showlist():
@@ -115,7 +115,7 @@ def showlist():
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = elist,username = userd["user_id"],mst = len(dlist), rst = len(rlist))
+    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))
 @app.route("/showmine", methods=['GET'])#내 게시물만 가져오기
 @jwt_required()
 def showmine():
@@ -123,7 +123,7 @@ def showmine():
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),username = userd["user_id"])
+    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"])
 
 @app.route("/comment/<lid>", methods=['POST'])#댓글 구현
 @jwt_required()
