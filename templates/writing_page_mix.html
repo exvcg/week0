@@ -269,7 +269,11 @@
                 case 'bold': insertion = `**${selectedText}**`; cursorOffset = 2; break;
                 case 'italic': insertion = `*${selectedText}*`; cursorOffset = 1; break;
                 case 'quote': insertion = `> ${selectedText}`; cursorOffset = 2; break;
+<<<<<<< HEAD
                 case 'code': insertion = `\`\`\`python\n${selectedText}\n\`\`\``; cursorOffset = 10; break;
+=======
+                case 'code': insertion = `\`\`\`python\n${selectedText}\n\`\`\``; cursorOffset = 9; break;
+>>>>>>> 15abdb1d8e4f6ff2ca5d751888120132287b3982
             } 
 
             newText = text.substring(0, start) + insertion + text.substring(end);
