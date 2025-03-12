@@ -250,13 +250,13 @@
                 <hr>
                 <p>
                     <span class="label-container">
-                        🏅 <span><a href ="{{ url_for('showmine',number = 1) }}">작성한 글</a></span>
+                        🏅 <span><a style="text-decoration-line : none; color: black;" href ="{{ url_for('showmine',number = 1) }}">작성한 글</a></span>
                     </span>
                     <span>{{mst}}개</span>
                 </p>
                 <p>
                     <span class="label-container">
-                        🏅 <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a></span>
+                        🏅 <span><a style="text-decoration-line : none; color: black;" href ="{{ url_for('comentmine') }}">작성한 댓글</a></span>
                     </span>
                     <span>{{rst}}개</span>
                 </p>
@@ -272,7 +272,7 @@
                         <hr>
                             <div>
                                 <p class="article">
-                                    <a href="{{ url_for('showup', id=item.lid) }}">{{ item.content }}</a>
+                                    <a style="text-decoration-line : none; color: black;" href="{{ url_for('showup', id=item.lid) }}">{{ item.content }}</a>
                                 </p>
                             </div>
                         <hr>    
