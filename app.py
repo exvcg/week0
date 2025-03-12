@@ -69,11 +69,14 @@ def logout():
 @app.route("/make", methods=['GET'])#게시물 생성
 @jwt_required()
 def make():
-    return render_template("writing_page_mix.html")
+    current_user = get_jwt_identity()
+    userd = db.users.find_one({"_id":ObjectId(current_user)})
+    return render_template("writing_page_mix.html",ID = userd["user_id"])
 @app.route("/listup", methods=['POST'])#게시물 생성
 @jwt_required()
 def listup():
     title = request.form['title']
+    userd = db.users.find_one({"_id":ObjectId(current_user)})
     if(title == ""):
         return redirect(url_for("main"))
     con = request.form['content']
