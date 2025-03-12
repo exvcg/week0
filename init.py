@@ -9,7 +9,7 @@ client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑
 db = client.dbjungle                      # 'dbjungle'라는 이름의 db를 만듭니다.
 
 def insert_user():
-    users = [70,15,20]
+    users = list(range(1,91))
     for user in users:
         userc = str(user)
         user_data = {"user_id":userc,"password":"0000"}

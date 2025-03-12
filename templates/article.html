@@ -284,7 +284,7 @@
             <div class="user-info">
                 <img src="../static/user.png" alt="사용자">
                 <span>{{ ID }}번 훈련생</span>
-                <span class="logout">로그아웃</span>
+                <span class="logout"><a href ="{{ url_for('logout')}}">로그아웃</a></span>
             </div>
         </div>
 
@@ -319,7 +319,7 @@
                 </div>
                 <div class="content-container">
                     <div class="content-container-title">
-                        <p id="title">{{ cont.title }}</p>
+                        <p id="title"><h1>{{ cont.title }}<h1></p>
                     </div>
                     <div class="content-container-article">
                         {{cont.content|safe}}
