@@ -193,9 +193,10 @@ def delete(id):
 @jwt_required()
 def comentmine():#내가 단 댓글 가져오기
     current_user = get_jwt_identity()
+    userd = db.users.find_one({"_id":ObjectId(current_user)})
     elist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("commentmine.html",coms = elist,mst = len(dlist), rst = len(elist))
+    return render_template("commentmine.html",coms = elist,mst = len(dlist), rst = len(elist),ID = userd["user_id"])
 @app.route("/cdelete/<id>")
 @jwt_required()
 def cdelete(id):#내가 단 댓글 가져오기
