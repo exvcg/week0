@@ -2,12 +2,10 @@ import datetime
 from bson import ObjectId
 from flask import Flask, make_response, render_template, jsonify, request,redirect,session, url_for
 from flask_jwt_extended import *
-import requests
 from pymongo import MongoClient  # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 from flask.json.provider import JSONProvider
 import jwt
 import json
-import sys
 app = Flask(__name__)
 
 client = MongoClient('localhost',27017)  # mongoDB는 27017 포트로 돌아갑니다.
@@ -108,7 +106,7 @@ def page(number):
     elist = list(db.til.find().skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    pagenum = int(len(list(db.til.find()))/10) + 1
+    pagenum = int((len(list(db.til.find()))-1)/10)+1
     return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist),nums = pagenum,set = sets)    
 @app.route("/showlist", methods=['GET'])#게시물리스트 가져오기
 @jwt_required()
@@ -127,7 +125,7 @@ def showlist():
 def showmine(number):
     sets = int(int(number)/10)
     current_user = get_jwt_identity()
-    pagenum = int(len(list(db.til.find({'user': current_user})))/10) + 1
+    pagenum = int((len(list(db.til.find({'user': current_user})))-1)/10) + 1
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
