@@ -81,13 +81,25 @@
 
         /* 작성 영역 */
         .write-content,
-        .see-content {
+        .see-wrap {
             flex: 1;
-            background-color: white;
-            padding: 20px;
             overflow-y: auto;
         }
 
+        .write-content {
+            height: 95%;
+        }
+
+        .see-wrap {
+            height: 100%;
+        }
+
+        .write-content,
+        .see-content {
+            background-color: white;
+            padding: 20px;
+        }
+        
         .write-content label {
             display: block;
             font-size: 16.5px;
@@ -112,7 +124,7 @@
         }
 
         #markdownInput {
-            height: 67%;
+            height: 77%;
             resize: vertical;
         }
 
@@ -123,8 +135,13 @@
             cursor: pointer;
         }
 
+        .see-wrap {
+            height: 100%;
+        }
+
         /* 미리보기 영역 */
         .see-content {
+            height: 95%;
             background-color: white;
         }
 
@@ -157,12 +174,20 @@
         }
         /* 버튼 스타일 추가 */
         .basic-btn {
+            border: none;
             color: white;
             font-size: 16.5px;
             background-color: #5E2EED;
             margin-right: 10px;
             width: 87px;
             height: 32px;
+        }
+
+        /* 버튼을 오른쪽 끝으로 정렬 */
+        .button-container {
+            display: flex;
+            justify-content: flex-end;  /* 오른쪽 끝 정렬 */
+            margin-top: 12px;  /* 버튼과 미리보기 창 사이 간격 */
         }
 
     </style>
@@ -178,7 +203,7 @@
         <div class="user-info">
             <img src="../static/user.png" alt="사용자">
             <span>{{ ID }}번 훈련생</span>
-            <span class="logout">로그아웃</span>
+            <span class="logout"><a href ="{{ url_for('logout')}}">로그아웃</a></span>
         </div>
     </div>
 
@@ -187,12 +212,6 @@
             <p class="TIL">TODAY I LEARN</p>
             <!-- 버튼들을 감싸는 div 추가 -->
 
-            <div class="header-buttons">
-                <!-- 버튼들 클래스 추가 -->
-                <a href="{{ url_for('main') }}"><button class="basic-btn"
-                        style="background-color: gray; margin: 30px 50px 10px 0;">취소</button></a>
-                <!-- <a href = "{{ url_for('main') }}"><button>취소</button></a> -->
-            </div>
         </div>
         <div class="content2">
             <div class="write-content">
@@ -212,18 +231,28 @@
                 </div>
                 <textarea id="markdownInput" placeholder="내용을 입력하세요."></textarea>
             </div>
-            <div class="see-content">
-                <h1 id="titlePreview"></h1>
-                <div id="htmlOutput"></div>
-            </div>
-            <form method="post" action="{{url_for('listup')}}">
-                <div style="display:none">
-                    <input id="titl" name="title" type="text">
-                    <textarea id="mcontent" name=mcontent></textarea>
-                    <textarea id="hcontent" name="content"></textarea>
+
+            <div class="see-wrap">
+                <div class="see-content">
+                    <h1 id="titlePreview"></h1>
+                    <div id="htmlOutput"></div>
                 </div>
-                <button type="submit" class="basic-btn">출간하기</button>
-            </form>
+
+                <!-- 버튼을 감싸는 div 추가 -->
+                <div class="button-container">
+                    <form method="post" action="{{ url_for('listup') }}">
+                        <button type="submit" class="basic-btn">출간하기</button>
+                        <a href="{{ url_for('main') }}">
+                            <button type="button" class="basic-btn" style="background-color: gray;">취소</button>
+                        </a>
+                        <div style="display:none">
+                            <input id="titl" name="title" type="text">
+                            <textarea id="mcontent" name="mcontent"></textarea>
+                            <textarea id="hcontent" name="content"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -235,39 +264,39 @@
             const text = textarea.value;
             const selectedText = text.substring(start, end);
             let insertion = '';
+            let newText = '';
             let cursorOffset = 0;
 
-            switch (type) {
-                case 'h1': insertion = '# '; cursorOffset = 2; break;
-                case 'h2': insertion = '## '; cursorOffset = 3; break;
-                case 'h3': insertion = '### '; cursorOffset = 4; break;
-                case 'h4': insertion = '#### '; cursorOffset = 5; break;
-                case 'bold': insertion = '****'; cursorOffset = 2; break;
-                case 'italic': insertion = '**'; cursorOffset = 1; break;
-                case 'quote': insertion = '> '; cursorOffset = 2; break;
-                case 'code': insertion = '```python\n\n```'; cursorOffset = 9; break;
-            }
+            switch(type) {
+                case 'h1': insertion = `# ${selectedText}`; cursorOffset = 2; break;
+                case 'h2': insertion = `## ${selectedText}`; cursorOffset = 3; break;
+                case 'h3': insertion = `### ${selectedText}`; cursorOffset = 4; break;
+                case 'h4': insertion = `#### ${selectedText}`; cursorOffset = 5; break;
+                case 'bold': insertion = `**{selectedText}**`; cursorOffset = 2; break;
+                case 'italic': insertion = `*{selectedText}*`; cursorOffset = 1; break;
+                case 'quote': insertion = `> {selectedText}`; cursorOffset = 2; break;
+                case 'code': insertion = `\`\`\`python\n${selectedText}\n\`\`\``; cursorOffset = 9; break;
+            } 
 
-            textarea.value = text.substring(0, start) + insertion + text.substring(end);
+            newText = text.substring(0, start) + insertion + text.substring(end);
+            textarea.value = newText;
             textarea.focus();
-            textarea.setSelectionRange(start + cursorOffset, start + cursorOffset);
+            textarea.setSelectionRange(end + cursorOffset, end + cursorOffset);
             updatePreview();
         }
 
         function updatePreview() {
             const markdownContent = document.getElementById('markdownInput').value;
             const preview = marked.parse(markdownContent);
-            document.getElementById('mcontent').value = document.getElementById('markdownInput').value;
             document.getElementById('htmlOutput').innerHTML = preview;
-            document.getElementById('hcontent').innerHTML = preview;
             document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
+                hljs.highlightElement(block);
             });
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             marked.setOptions({
-                highlight: function (code, lang) {
+                highlight: function(code, lang) {
                     if (lang && hljs.getLanguage(lang)) {
                         return hljs.highlight(code, { language: lang }).value;
                     }
@@ -276,9 +305,8 @@
             });
 
             // 제목 실시간 미리보기
-            document.getElementById('title').addEventListener('input', function () {
+            document.getElementById('title').addEventListener('input', function() {
                 document.getElementById('titlePreview').textContent = this.value;
-                document.getElementById('titl').value = this.value;
             });
 
             // 내용 실시간 미리보기
