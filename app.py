@@ -136,7 +136,6 @@ def showmine(number):
 @jwt_required()
 def comment(lid):
     com = request.form["commentx"]
-    Uid = get_jwt_identity()
     comments = {'lid': lid , 'content':com , 'user':Uid}
     db.ccc.insert_one(comments)
     return redirect(url_for("showup", id = lid))
@@ -145,7 +144,9 @@ def comment(lid):
 @jwt_required()
 def want(id):
      con = db.til.find_one({"_id":ObjectId(id)})   
-     return render_template("change.html",origin = con)
+     current_user = get_jwt_identity()
+     userd = db.users.find_one({"_id":ObjectId(current_user)})
+     return render_template("change.html",origin = con,ID = userd["user_id"])
 
 @app.route("/change/<ids>", methods=['POST'])#내용변경수락
 @jwt_required()
