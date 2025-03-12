@@ -344,7 +344,9 @@
 
                         <div class="datgul">
                             <p>{{com.content}}</p>
-                            <button type="button" class="btn">x</button>
+                            
+                            <a href = "{{url_for('cdelete',id = com['_id'])}}"><button type="button" class="btn">x</button></a>
+
                         </div>
 
                         {% endfor %}
