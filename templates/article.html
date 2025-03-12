@@ -25,8 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
         /* 배경색 설정 */
-        html,
-        body {
+        html, body {
             height: 100%;
             margin: 0;
             background-color: #EEEBF7;
@@ -34,24 +33,34 @@
 
         .site-top {
             display: flex;
-            align-items: center;
-            /* 수직 정렬 */
+            align-items: center; /* 수직 정렬 */
             background-color: white;
-            height: 7%;
+            height: 53px;
             padding-left: 40px;
         }
 
-        .site-top>img {
+        .navbar-item > img {
             height: 100%;
         }
 
-        .site-top>p {
+        .site-top p img {
+            height: 32px;
+            margin-right: 10px;
+        }
+
+        .site-top > p {
+            color: #111111;
             font-size: 13.5px;
-            color: #646464;
             margin-left: auto;
             margin-right: 20px;
-            display: inline-block;
+            display: flex;
+            align-items: center; /* 수직 정렬 */
+        }
+
+        .site-top > p > span {
+            color: #646464;
             text-decoration: underline;
+            margin-left: 30px;
         }
 
         .container {
@@ -62,8 +71,7 @@
         .my-page {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            /* 기본 정렬 왼쪽 */
+            align-items: flex-start; /* 기본 정렬 왼쪽 */
             position: relative;
             width: 286.5px;
             background-color: white;
@@ -71,7 +79,7 @@
             padding: 20px 20px 10px 20px;
         }
 
-        .my-page>.my-page-text {
+        .my-page > .my-page-text {
             font-size: 16.5px;
             color: #111111;
             padding-top: 0;
@@ -84,20 +92,26 @@
             margin: 3px 0;
         }
 
-        .my-page>p {
+        .my-page > p {
             display: flex;
-            justify-content: space-between;
-            /* 양쪽 정렬 */
-            align-items: center;
-            /* 개별 요소 수직 정렬 */
+            justify-content: space-between; /* 양쪽 정렬 */
+            align-items: center; /* 개별 요소 수직 정렬 */
             font-size: 14px;
             color: #2b2b2b;
             padding: 10px 0;
             margin: 0;
+            width: 100%;
         }
 
-        .my-page>.pw-edit {
-            align-self: flex-end;
+        .my-page > p span:last-child {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .my-page > .pw-edit {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
             color: #646464;
             margin-top: 30px;
             text-decoration: underline;
@@ -108,8 +122,9 @@
             width: 100%;
         }
 
-        .content-list {
+        .content-container {
             background-color: white;
+            padding: 3% 6%;
         }
 
         .content-header {
@@ -118,7 +133,7 @@
             margin-bottom: 10px;
         }
 
-        .content-header>p {
+        .content-header > p {
             display: inline-block;
             font-size: 20px;
             color: #111111;
@@ -127,6 +142,7 @@
 
         .basic-btn {
             color: white;
+            border: none;
             font-size: 16.5px;
             background-color: #5E2EED;
             margin-right: 10px;
@@ -134,36 +150,20 @@
             height: 32px;
         }
 
-        .content-list>div>p {
+        .content-list > div > p {
             font-size: 15px;
             color: #2b2b2b;
         }
 
-        .content-list>div>p span {
+        .content-list > div > p span {
             color: #8B8B8B;
-        }
-
-        .content-list hr {
-            border: 0.5px solid #EEEBF7;
-            margin: 0;
-        }
-
-        .article {
-            display: flex;
-            justify-content: space-between;
-            /* 양쪽 정렬 */
-            align-items: center;
-            /* 개별 요소 수직 정렬 */
-            margin: 15px 25px;
         }
 
         .page-list {
             position: fixed;
             bottom: 40px;
-            left: 50%;
-            /* 수평 정렬 */
-            transform: translateX(-50%);
-            /* 수평 정렬 */
+            left: 50%; /* 수평 정렬 */
+            transform: translateX(-50%); /* 수평 정렬 */
         }
 
         .page-num {
@@ -173,24 +173,81 @@
             letter-spacing: 5px;
         }
 
-        .button-container {
-            margin-right: 10px;
-        }
-
         .page-btn {
             color: #BBBBBB;
         }
 
-        .content-container {
-            background-color: white;
-
-
+        .content hr {
+            display: block;
+            width: 100%;
+            border: 0.5px solid white;
+            margin: 100px 0 10px 0;
         }
 
-        .content-container-title,.content-container-eotrmf-header {
+        .registrate-com {
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .registrate-com p {
+            margin: 0; /* 기본 마진 제거 */
+            font-size: 16px;
+            color: #111111;
+        }
+
+        .registrate-btn {
+            margin-right: 38.5%;
+            padding: 5px 15px; /* 버튼 패딩 조정 */
+            font-size: 16.5px;
+            background-color: #5E2EED;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #wrap {
+            font-size: 20px;
+        }
+
+        .comment-input {
             display: flex;
-            justify-content: space-between;
+            font-size: 16px;
+            color: #8B8B8B;
+            width: 60%;
+            border: 1px solid #BBBBBB;
+            padding: 13px;
+            margin-bottom: 15px;
         }
+        .datgul {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        .datgul p,
+        .datgul .btn {
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        .datgul p {
+            font-size: 15px;
+            color: #2b2b2b;
+        }
+
+        .datgul .btn {
+            border: none;
+            background-color: transparent;
+            font-size: 15px;
+            color: #111111;
+            cursor: pointer;
+        }
+        
     </style>
 
     <script>
@@ -200,8 +257,8 @@
 <body>
     <div class="site-top">
         <a class="navbar-item" href="{{ url_for('main') }}">
-            <h1 class="title is-4">TWL</h1>
-          </a>
+            <img src="../static/logo.png">
+        </a>
         <p><a href ="{{ url_for('logout')}}">로그아웃</a></p>
     </div>
 
