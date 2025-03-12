@@ -6,10 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <!-- Optional JavaScript -->
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -223,10 +219,22 @@
 
         .page-list {
             position: fixed;
-            left: 50%;
-            /* 수평 정렬 */
-            transform: translateX(-50%);
-            /* 수평 정렬 */
+            bottom: 40px;
+            left: 50%; /* 수평 정렬 */
+            transform: translateX(-50%); /* 수평 정렬 */
+        }
+
+        .page-num {
+            font-size: 15px;
+            color: #111111;
+            margin: 0 15px;
+            letter-spacing: 5px;
+        }
+
+        .page-btn {
+            background-color: transparent;
+            border: transparent;
+            color: #a1a1a1;
         }
     </style>
 
@@ -288,21 +296,17 @@
         </div>
     </div>
 
-        <div class="page-list">
-            {% if  nums > 1 and (nums%10 != 0) %}
-            <span><button type="button" class="btn">◀</button></span>
-                <span>
-    
-                    
-                    {% for num in range((set*10)+1, nums+1) %}
-                    <a href="{{ url_for('page', number=num) }}"><button type="button" class="btn">{{ num }}</button></a>
-                    {% endfor %}
-                    
-    
-                </span>
-            <span><button type="button" class="btn">▶</button></span>
-            {% endif %}
-        </div>
+    <div class="page-list">
+        {% if nums > 1 %}
+        <span><button type="button" class="left page-btn">◀</button></span>
+        <span class="page-num">
+            {% for num in range((set*10)+1, nums+1) %}
+            <a href="{{ url_for('showmine', number=num) }}"><button type="button" class="btn">{{ num }}</button></a>
+            {% endfor %}
+        </span>
+        <span><button type="button" class="right page-btn">▶</button></span>
+        {% endif %}
+    </div>
 </body>
 
 </html>

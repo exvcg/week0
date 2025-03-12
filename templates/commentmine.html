@@ -206,6 +206,7 @@
                 border: 0.5px solid #EEEBF7;
                 margin: 0;
             }
+
             .page-list {
                 position: fixed;
                 bottom: 40px;
@@ -221,7 +222,9 @@
             }
 
             .page-btn {
-                color: #BBBBBB;
+                background-color: transparent;
+                border: transparent;
+                color: #a1a1a1;
             }
 
         </style>
@@ -283,7 +286,15 @@
         </div>
 
         <div class="page-list">
-            
+            {% if nums > 1 %}
+            <span><button type="button" class="left page-btn">◀</button></span>
+            <span class="page-num">
+                {% for num in range((set*10)+1, nums+1) %}
+                <a href="{{ url_for('showmine', number=num) }}"><button type="button" class="btn">{{ num }}</button></a>
+                {% endfor %}
+            </span>
+            <span><button type="button" class="right page-btn">▶</button></span>
+            {% endif %}
         </div>
     </body>
 </html>
