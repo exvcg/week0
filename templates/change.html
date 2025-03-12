@@ -238,7 +238,7 @@
                 </div>
 
                 <div class="button-container">
-                    <form method="post" action="{{url_for('change',id = origin._id)}}">
+                    <form method="post" action="{{url_for('change',ids = origin._id)}}">
                         <button type="submit" class="basic-btn">수정하기</button>
                         <div style="display:none">
                             <input id="titl" name="title" type="text" value="{{origin.title}}">

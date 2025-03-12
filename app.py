@@ -151,14 +151,14 @@ def want(id):
      con = db.til.find_one({"_id":ObjectId(id)})   
      return render_template("change.html",origin = con)
 
-@app.route("/change/<id>", methods=['POST'])#내용변경수락
+@app.route("/change/<ids>", methods=['POST'])#내용변경수락
 @jwt_required()
-def change(id):
+def change(ids):
     title = request.form['title']
     content = request.form["content"]
     mcon = request.form['mcontent']
-    result = db.til.update_one({"_id":ObjectId(id)},{'$set': {'title':title ,'content': content,'md':mcon}})
-    return redirect(url_for("main"))
+    result = db.til.update_one({"_id":ObjectId(ids)},{'$set': {'title':title ,'content': content,'md':mcon}})
+    return redirect(url_for("showup",id = ids))
 @app.route("/cpw")#비번변경창 띄우기
 @jwt_required()
 def cpw():
