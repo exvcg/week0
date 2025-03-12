@@ -57,7 +57,7 @@ def login():
         return render_template("login_page.html")
 
     # JWT 토큰 생성 (1시간 유효)
-    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=3))
+    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=5))
     response = make_response(redirect(url_for("page",number = 1)))#return의 역할
     response.set_cookie("access_token", access_token, httponly=True)#쿠키 설정
     return response
