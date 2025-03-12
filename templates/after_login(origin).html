@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWL</title>
+    <!-- BULMA -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- 폰트 -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Stylish&display=swap"
+        rel="stylesheet"> -->
+    <style>
+        body{
+            background-color: lavender;
+        }
+
+        .wrap{
+            background-color: white;
+            padding: 10px;
+            margin: 10px;
+            height: 500px;
+        }
+        .wrapbot{
+            margin-bottom: 10px;
+        }
+        .content{
+            margin-top: auto;
+        }
+        .my-page {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start; /* 기본 정렬 왼쪽 */
+                position: relative;
+                width: 286.5px;
+                background-color: white;
+                margin: 40px 0 0 40px;
+                padding: 20px 20px 10px 20px;
+            }
+        .my-page > p {
+                display: flex;
+                justify-content: space-between; /* 양쪽 정렬 */
+                align-items: center; /* 개별 요소 수직 정렬 */
+                font-size: 14px;
+                color: #2b2b2b;
+                padding: 10px 0;
+                margin: 0;
+            }
+    </style>
+        <!-- <style>
+        * {
+            font-family: "Stylish", serif;
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        .wrap {
+            width: 900px;
+            margin: 10px auto;
+        }
+
+        #DarkTurquoise-text {
+            color: Darkturquoise;
+        }
+
+        #Blue-text {
+            color: blue;
+            font-weight: 600;
+        }
+
+        .postingbox {
+            width: 500px;
+            margin: 10px auto 30px auto;
+            border: 3px solid black;
+            border-radius: 5px;
+            padding: 50px;
+        } -->
+    </style>
+</head>
+
+<body>
+    <nav class="navbar is-white wrapbot">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{{ url_for('main') }}">
+            <h1 class="title is-4">TWL</h1>
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu" role="button" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </span>
+        </div>
+    
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="#">{{username}}</a>
+            <a class="navbar-item" href="{{ url_for('logout') }}">로그아웃</a>
+          </div>
+        </div>
+      </nav>
+    
+      <!-- 메인 콘텐츠 -->
+      <div class="container">
+        <div class="columns">
+          <!-- 좌측 영역 -->
+          <div class="column is-one-quarter wrap" >
+            <h1 class="title">마이 페이지</h1>
+            
+            <p><a href ="{{ url_for('showmine') }}">▶ 내가 작성한 글</p>
+            <p>▶ 내가 작성한 댓글</p>
+            <P>▶ 좋아요 누른 글</P>
+            <div class="content">
+            <P><a href = "{{ url_for('cpw') }}">비밀번호 수정</P>
+            </div>
+        </div>
+    
+          <!-- 우측 영역 -->
+          <div class="column is-three-quarter">
+            <div class="content-header">
+              <p>TODAY WE LEARN</p>
+              <button class="write-article basic-btn"><a href="{{url_for('make')}}">글쓰기</button>
+            </div>
+            <table class="table is-bordered">
+              <tbody>
+                  {% for item in lessons %}
+                  <tr>
+                      <td>{{ item.title }}<span>{{item.month}}{{item.day}}<span></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Bulma의 자바스크립트 필요 -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const burgers = document.querySelectorAll('.navbar-burger');
+          const menu = document.getElementById('navbarMenu');
+    
+          burgers.forEach(burger => {
+            burger.addEventListener('click', () => {
+              menu.classList.toggle('is-active');
+              burger.classList.toggle('is-active');
+            });
+          });
+        });
+      </script>
+
+
+    <div>
+
+
+    </div>
+</body>
+
+</html>

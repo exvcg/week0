@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
+
+        <!-- ICON -->
+        <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>    
+        
+        <style>
+            /* 배경색 설정 */
+            html, body {
+                height: 100%;
+                margin: 0;
+                background-color: #EEEBF7;
+            }
+
+            .site-top {
+                display: flex;
+                align-items: center; /* 수직 정렬 */
+                background-color: white;
+                height: 7%;
+                padding-left: 40px;
+            }
+
+            .site-top > img {
+                height: 100%;
+            }
+
+            .site-top > p {
+                font-size: 13.5px;
+                color: #646464;
+                margin-left: auto;
+                margin-right: 20px;
+                display: inline-block;
+                text-decoration: underline;
+            }
+
+            .container {
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .my-page {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start; /* 기본 정렬 왼쪽 */
+                position: relative;
+                width: 286.5px;
+                background-color: white;
+                margin: 40px 0 0 40px;
+                padding: 20px 20px 10px 20px;
+            }
+
+            .my-page > .my-page-text {
+                font-size: 16.5px;
+                color: #111111;
+                padding-top: 0;
+            }
+
+            .my-page hr {
+                display: block;
+                width: 100%;
+                border: 0.5px solid #EEEBF7;
+                margin: 3px 0;
+            }
+
+            .my-page > p {
+                display: flex;
+                justify-content: space-between; /* 양쪽 정렬 */
+                align-items: center; /* 개별 요소 수직 정렬 */
+                font-size: 14px;
+                color: #2b2b2b;
+                padding: 10px 0;
+                margin: 0;
+            }
+
+            .my-page > .pw-edit {
+                align-self: flex-end;
+                color: #646464;
+                margin-top: 30px;
+                text-decoration: underline;
+            }
+
+            .content {
+                margin: 35px 40px 0 40px;
+                width: 100%;
+            }
+
+            .content-list {
+                background-color: white;
+            }
+
+            .content-header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .content-header > p {
+                display: inline-block;
+                font-size: 20px;
+                color: #111111;
+                margin: 0;
+            }
+
+            .basic-btn {
+                color: white;
+                font-size: 16.5px;
+                background-color: #5E2EED;
+                margin-right: 10px;
+                width: 87px;
+                height: 32px;
+            }
+
+            .content-list > div > p {
+                font-size: 15px;
+                color: #2b2b2b;
+            }
+
+            .content-list > div > p span {
+                color: #8B8B8B;
+            }
+
+            .content-list hr {
+                border: 0.5px solid #EEEBF7;
+                margin: 0;
+            }
+
+            .article {
+                display: flex;
+                justify-content: space-between; /* 양쪽 정렬 */
+                align-items: center; /* 개별 요소 수직 정렬 */
+                margin: 15px 25px;
+            }
+            .content-list tr {
+                border: 0.5px solid #EEEBF7;
+                margin: 0;
+            }
+            .page-list {
+                position: fixed;
+                bottom: 40px;
+                left: 50%; /* 수평 정렬 */
+                transform: translateX(-50%); /* 수평 정렬 */
+            }
+
+            .page-num {
+                font-size: 15px;
+                color: #111111;
+                margin: 0 15px;
+                letter-spacing: 5px;
+            }
+
+            .page-btn {
+                color: #BBBBBB;
+            }
+
+        </style>
+
+        <script>
+        </script>
+    </head>
+    <body>
+        <div class="site-top">
+            <a class="navbar-item" href="{{ url_for('main') }}">
+                <h1 class="title is-4">TWL</h1>
+              </a>
+            <p><a href ="{{ url_for('logout')}}">로그아웃</a></p>
+        </div>
+
+        <div class="container">
+            <div class="my-page">
+                <p class="my-page-text">마이 페이지</p>
+                <hr>
+                <p>
+                    <span class="label-container">
+                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a>{{mst}}개</span>
+                    </span>
+                    
+                </p>
+                <p>
+                    <span class="label-container">
+                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a>{{rst}}개</span>
+                    </span>    
+                </p>
+                <p>
+                    <span class="label-container">
+                        ▶ <span>좋아요 누른 글</span>
+                    </span>
+                </p>
+                <p class="pw-edit"><a href = "{{ url_for('cpw') }}">비밀번호 수정</a></p>
+            </div>
+            
+            <div class="content">
+                <div class="content-header">
+                    <p>TODAY WE LEARN</p>
+                    <a href="{{url_for('make')}}"><button class="write-article basic-btn" >글쓰기</button></a>
+                </div>
+                <div class = "content-list">
+                    {% for item in coms %}
+                        <hr>
+                            <div>
+                                <p class="article">
+                                    <a href="{{ url_for('showup', id=item.lid) }}">{{ item.content }}</a>
+                                </p>
+                            </div>
+                        <hr>    
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="page-list">
+            
+        </div>
+    </body>
+</html>
