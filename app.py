@@ -153,14 +153,20 @@ def change(id):
 @app.route("/cpw")#비번변경창 띄우기
 @jwt_required()
 def cpw():
-    return render_template("cpw.html")
+    return render_template("password_edit.html")
 @app.route("/password", methods=['POST'])#비번변경
 @jwt_required()
 def password():
     newPass = request.form["password"]
-    id = get_jwt_identity()
-    db.users.update_one({"_id":ObjectId(id)},{'$set': {'password': newPass}})
-    return redirect(url_for("logout"))
+    check = request.form["check"]
+    print(newPass)
+    print(check)
+    if (newPass == check):
+        id = get_jwt_identity()
+        db.users.update_one({"_id":ObjectId(id)},{'$set': {'password': newPass}})
+        return redirect(url_for("logout"))
+    
+    return redirect(url_for("cpw"))
 @app.route("/delete/<id>", methods=['GET'])#삭제
 @jwt_required()
 def delete(id):
