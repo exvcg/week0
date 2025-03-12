@@ -234,7 +234,7 @@
                 <!-- 버튼을 감싸는 div 추가 -->
                 <div class="button-container">
                     <form method="post" action="{{ url_for('listup') }}">
-                        <button type="submit" class="basic-btn">출간하기</button>
+                        <button type="submit" class="basic-btn" style="cursor: pointer;">출간하기</button>
                         
                         <div style="display:none">
                             <input id="titl" name="title" type="text">
@@ -243,7 +243,7 @@
                         </div>
                     </form>
                     <a href="{{ url_for('main') }}">
-                        <button type="button" class="basic-btn" style="background-color: gray;">취소</button>
+                        <button type="button" class="basic-btn" style="background-color: gray; cursor: pointer;">취소</button>
                     </a>
                 </div>
             </div>
