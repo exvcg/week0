@@ -130,8 +130,8 @@ def showmine(number):
     pagenum = int(len(list(db.til.find({'user': current_user})))/10) + 1
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
+    dlist = list(db.til.find({'user': current_user}).skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
+    return render_template("after_login_mine.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
 
 @app.route("/comment/<lid>", methods=['POST'])#댓글 구현
 @jwt_required()
