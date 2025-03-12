@@ -16,7 +16,10 @@
 
         <!-- ICON -->
         <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>    
-        
+        <!-- highlight.js 스타일시트 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <!-- highlight.js 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <style>
             html,
             body {
@@ -327,7 +330,7 @@
                 <div class=".content-container-datgul">
                     <form method="POST" action="{{url_for('comment',lid = cont['_id'])}}">
                         <div class="registrate-com">
-                            <p id="wrap">{{datgul_num}}개의 댓글</p>
+                            <p id="wrap">{{comm|length}}개의 댓글</p>
                             <button class="registrate-btn basic-btn">등록</button>
                         </div>
                         <div style="display:none">
