@@ -294,7 +294,7 @@
                 <hr>
                 <p>
                     <span class="label-container">
-                        🏅 <span><a href ="{{ url_for('showmine') }}">작성한 글</a></span>
+                        🏅 <span><a href ="{{ url_for('showmine',number = 1) }}">작성한 글</a></span>
                     </span>
                     <span>{{mst}}개</span>
                 </p>
@@ -319,11 +319,7 @@
                 </div>
                 <div class="content-container">
                     <div class="content-container-title">
-<<<<<<< HEAD
                         <h1 id="title">{{ cont.title }}</h1>
-=======
-                        <p id="title"><h1>{{ cont.title }}<h1></p>
->>>>>>> 4053274f1e2997148924f05dc5da54bdb91ef6ba
                     </div>
                     <div class="content-container-article">
                         {{cont.content|safe}}

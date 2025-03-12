@@ -239,15 +239,16 @@
                 <div class="button-container">
                     <form method="post" action="{{ url_for('listup') }}">
                         <button type="submit" class="basic-btn">출간하기</button>
-                        <a href="{{ url_for('main') }}">
-                            <button type="button" class="basic-btn" style="background-color: gray;">취소</button>
-                        </a>
+                        
                         <div style="display:none">
-                            <input id="title" name="title" type="text">
+                            <input id="titl" name="title" type="text">
                             <textarea id="mcontent" name="mcontent"></textarea>
                             <textarea id="hcontent" name="content"></textarea>
                         </div>
                     </form>
+                    <a href="{{ url_for('main') }}">
+                        <button type="button" class="basic-btn" style="background-color: gray;">취소</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -283,9 +284,11 @@
         }
 
         function updatePreview() {
+            document.getElementById('mcontent').value = document.getElementById('markdownInput').value;
             const markdownContent = document.getElementById('markdownInput').value;
             const preview = marked.parse(markdownContent);
             document.getElementById('htmlOutput').innerHTML = preview;
+            document.getElementById('hcontent').innerHTML = preview;
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
@@ -304,6 +307,7 @@
             // 제목 실시간 미리보기
             document.getElementById('title').addEventListener('input', function() {
                 document.getElementById('titlePreview').textContent = this.value;
+                document.getElementById('titl').value = this.value;
             });
 
             // 내용 실시간 미리보기
