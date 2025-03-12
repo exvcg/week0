@@ -290,14 +290,12 @@
     </div>
 
     <div class="page-list">
-        {% if  nums > 1 %}
+        {% if nums > 1 %}
         <span><button type="button" class="btn">◀</button></span>
         <span>
-            
-            {% for num in range((set*10)+1,nums+1) %}
-            <a href = "{{url_for('page',number = num)}}"><button type="button" class="btn">{{num}}</button></a>
+            {% for num in range((set*10)+1, nums+1) %}
+            <a href="{{ url_for('page', number=num) }}"><button type="button" class="btn">{{ num }}</button></a>
             {% endfor %}
-            
         </span>
         <span><button type="button" class="btn">▶</button></span>
         {% endif %}
