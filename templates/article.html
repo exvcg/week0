@@ -193,24 +193,6 @@
                 color: #8B8B8B;
             }
 
-            .page-list {
-                position: fixed;
-                bottom: 40px;
-                left: 50%; /* 수평 정렬 */
-                transform: translateX(-50%); /* 수평 정렬 */
-            }
-
-            .page-num {
-                font-size: 15px;
-                color: #111111;
-                margin: 0 15px;
-                letter-spacing: 5px;
-            }
-
-            .page-btn {
-                color: #BBBBBB;
-            }
-
             .content hr {
                 display: block;
                 width: 100%;
@@ -254,7 +236,9 @@
                 border: 1px solid #BBBBBB;
                 padding: 13px;
                 margin-bottom: 15px;
+                resize: none;
             }
+
             .datgul {
                 display: flex;
                 align-items: center;
@@ -307,15 +291,15 @@
                 <hr>
                 <p>
                     <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a>{{mst}}개</span>
+                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a></span>
                     </span>
-                    <span>10개</span>
+                    <span>{{mst}}개</span>
                 </p>
                 <p>
                     <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a>{{rst}}개</span>
+                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a></span>
                     </span>
-                    <span>10개</span>
+                    <span>{{rst}}개</span>
                 </p>
                 <p>
                     <span class="label-container">
@@ -370,12 +354,6 @@
                     </div>          
                 </div>
             </div>
-        </div>
-
-        <div class="page-list">
-            <span class="left page-btn">◀</span>
-            <span class="page-num">1 2 3 4 5 6 7 8 9</span>
-            <span class="right page-btn">▶</span>
         </div>
 
         <script>
