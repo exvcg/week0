@@ -132,10 +132,14 @@
 </head>
 <body>
     <div class="site-top">
-        <img src="../static/img/logo.png" alt="로고">
+        <!-- <a class="navbar-item" href="{{ url_for('main') }}">
+            <h1 class="title is-4">TWL</h1>
+          </a> -->
+        <!-- 수정 사항 : TWL 이미지 클릭시 main 접속-->
+        <a class="TWL " href="{{ url_for('main') }}"></a>
         <div class="user-info">
-            <img src="../static/img/user.png" alt="사용자">
-            <span>60번 훈련생</span>
+            <img src="../static/user.png" alt="사용자">
+            <span>{{ ID }}번 훈련생</span>
             <span class="logout">로그아웃</span>
         </div>
     </div>
