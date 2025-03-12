@@ -301,12 +301,6 @@
                     </span>
                     <span>{{rst}}개</span>
                 </p>
-                <p>
-                    <span class="label-container">
-                        ▶ <span>좋아요 누른 글</span>
-                    </span>
-                    <span>10개</span>
-                </p>
                 <p class="pw-edit"><a href = "{{ url_for('cpw') }}">비밀번호 수정</a></p>
             </div>
             
@@ -333,7 +327,7 @@
                 <div class=".content-container-datgul">
                     <form method="POST" action="{{url_for('comment',lid = cont['_id'])}}">
                         <div class="registrate-com">
-                            <p id="wrap">{{datgul_num}}개의 댓글</p>
+                            <p id="wrap">{{comm|length}}개의 댓글</p>
                             <button class="registrate-btn basic-btn">등록</button>
                         </div>
                         <div style="display:none">

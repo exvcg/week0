@@ -18,32 +18,83 @@
         <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>    
         
         <style>
-            /* 배경색 설정 */
-            html, body {
+            html,
+            body {
                 height: 100%;
                 margin: 0;
                 background-color: #EEEBF7;
             }
-
-            .site-top {
-                display: flex;
-                align-items: center; /* 수직 정렬 */
-                background-color: white;
-                height: 7%;
-                padding-left: 40px;
+            /* 버튼 스타일 추가 */
+            .basic-btn {
+                color: white;
+                font-size: 16.5px;
+                background-color: #5E2EED;
+                margin-right: 10px;
+                width: 87px;
+                height: 32px;
             }
 
-            .site-top > img {
+            /* 헤더 스타일 */
+            .site-top {
+                background-color: white;
+                height: 53px;
+                padding: 0 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .site-top img {
                 height: 100%;
             }
 
-            .site-top > p {
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
                 font-size: 13.5px;
+            }
+
+            .user-info img {
+                height: 32px;
+            }
+
+            .logout {
                 color: #646464;
+                text-decoration: underline;
+                margin-left: 30px;
+            }
+
+            /* TWL 이미지 스타일 추가 */
+            .TWL {
+                width: 70px;
+                height: 35px;
+                background-image: url('../static/logo.png');
+                background-size: cover;
+                color: white;
+                cursor: pointer;
+                margin: 0;
+                text-decoration: none;
+            }
+
+            .site-top p img {
+                height: 32px;
+                margin-right: 10px;
+            }
+
+            .site-top > p {
+                color: #111111;
+                font-size: 13.5px;
                 margin-left: auto;
                 margin-right: 20px;
-                display: inline-block;
+                display: flex;
+                align-items: center; /* 수직 정렬 */
+            }
+
+            .site-top > p > span {
+                color: #646464;
                 text-decoration: underline;
+                margin-left: 30px;
             }
 
             .container {
@@ -83,10 +134,18 @@
                 color: #2b2b2b;
                 padding: 10px 0;
                 margin: 0;
+                width: 100%;
+            }
+
+            .my-page > p span:last-child {
+                margin-left: auto;
+                text-align: right;
             }
 
             .my-page > .pw-edit {
-                align-self: flex-end;
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
                 color: #646464;
                 margin-top: 30px;
                 text-decoration: underline;
@@ -115,6 +174,7 @@
             }
 
             .basic-btn {
+                border: none;
                 color: white;
                 font-size: 16.5px;
                 background-color: #5E2EED;
@@ -190,20 +250,15 @@
                 <hr>
                 <p>
                     <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a>{{mst}}개</span>
+                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a></span>
                     </span>
-                    
+                    <span>{{mst}}개</span>
                 </p>
                 <p>
                     <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a>{{rst}}개</span>
+                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a></span>
                     </span>
-                    
-                </p>
-                <p>
-                    <span class="label-container">
-                        ▶ <span>좋아요 누른 글</span>
-                    </span>
+                    <span>{{rst}}개</span>
                 </p>
                 <p class="pw-edit"><a href = "{{ url_for('cpw') }}">비밀번호 수정</a></p>
             </div>
