@@ -74,7 +74,11 @@ def make():
 @jwt_required()
 def listup():
     title = request.form['title']
+    if(title == ""):
+        return redirect(url_for("main"))
     con = request.form['content']
+    if(con == ""):
+        return redirect(url_for("main"))
     mcon = request.form['mcontent']
     now = datetime.datetime.now()
     month = now.month 
@@ -136,6 +140,7 @@ def showmine(number):
 @jwt_required()
 def comment(lid):
     com = request.form["commentx"]
+    Uid = get_jwt_identity()
     comments = {'lid': lid , 'content':com , 'user':Uid}
     db.ccc.insert_one(comments)
     return redirect(url_for("showup", id = lid))
