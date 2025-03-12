@@ -18,23 +18,63 @@
         <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>    
         
         <style>
-            /* 배경색 설정 */
-            html, body {
+            html,
+            body {
                 height: 100%;
                 margin: 0;
                 background-color: #EEEBF7;
             }
-
-            .site-top {
-                display: flex;
-                align-items: center; /* 수직 정렬 */
-                background-color: white;
-                height: 53px;
-                padding-left: 40px;
+            /* 버튼 스타일 추가 */
+            .basic-btn {
+                color: white;
+                font-size: 16.5px;
+                background-color: #5E2EED;
+                margin-right: 10px;
+                width: 87px;
+                height: 32px;
             }
 
-            .site-top > img {
+            /* 헤더 스타일 */
+            .site-top {
+                background-color: white;
+                height: 53px;
+                padding: 0 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .site-top img {
                 height: 100%;
+            }
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 13.5px;
+            }
+
+            .user-info img {
+                height: 32px;
+            }
+
+            .logout {
+                color: #646464;
+                text-decoration: underline;
+                margin-left: 30px;
+            }
+
+            /* TWL 이미지 스타일 추가 */
+            .TWL {
+                width: 70px;
+                height: 35px;
+                background-image: url('../static/logo.png');
+                background-size: cover;
+                color: white;
+                cursor: pointer;
+                margin: 0;
+                text-decoration: none;
             }
 
             .site-top p img {
@@ -249,14 +289,16 @@
     </head>
     <body>
         <div class="site-top">
-            <a class="navbar-item" href="{{ url_for('main') }}">
-                <img src="../static/logo.png">
-            </a>
-            <p>
-                <img src="../static/user.png">
-                60번 훈련생
-                <span href ="{{ url_for('logout')}}">로그아웃</span>
-            </p>
+            <!-- <a class="navbar-item" href="{{ url_for('main') }}">
+                <h1 class="title is-4">TWL</h1>
+              </a> -->
+            <!-- 수정 사항 : TWL 이미지 클릭시 main 접속-->
+            <a class="TWL " href="{{ url_for('main') }}"></a>
+            <div class="user-info">
+                <img src="../static/user.png" alt="사용자">
+                <span>{{ ID }}번 훈련생</span>
+                <span class="logout">로그아웃</span>
+            </div>
         </div>
 
         <div class="container">
