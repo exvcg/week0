@@ -1,291 +1,310 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Optional JavaScript -->
-        <!-- jQuery and Bootstrap Bundle (includes Popper) -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-            crossorigin="anonymous"></script>
 
-        <!-- ICON -->
-        <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>    
-        
-        <style>
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                background-color: #EEEBF7;
-            }
-            /* 버튼 스타일 추가 */
-            .basic-btn {
-                color: white;
-                font-size: 16.5px;
-                background-color: #5E2EED;
-                margin-right: 10px;
-                width: 87px;
-                height: 32px;
-            }
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            /* 헤더 스타일 */
-            .site-top {
-                background-color: white;
-                height: 53px;
-                padding: 0 40px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-            .site-top img {
-                height: 100%;
-            }
+    <!-- Optional JavaScript -->
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 
-            .user-info {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-size: 13.5px;
-            }
+    <!-- ICON -->
+    <script src="https://kit.fontawesome.com/ed3efe3d23.js" crossorigin="anonymous"></script>
 
-            .user-info img {
-                height: 32px;
-            }
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background-color: #EEEBF7;
+        }
 
-            .logout {
-                color: #646464;
-                text-decoration: underline;
-                margin-left: 30px;
-            }
+        /* 버튼 스타일 추가 */
+        .basic-btn {
+            color: white;
+            font-size: 16.5px;
+            background-color: #5E2EED;
+            margin-right: 10px;
+            width: 87px;
+            height: 32px;
+        }
 
-            /* TWL 이미지 스타일 추가 */
-            .TWL {
-                width: 70px;
-                height: 35px;
-                background-image: url('../static/logo.png');
-                background-size: cover;
-                color: white;
-                cursor: pointer;
-                margin: 0;
-                text-decoration: none;
-            }
+        /* 헤더 스타일 */
+        .site-top {
+            background-color: white;
+            height: 53px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-            .site-top p img {
-                height: 32px;
-                margin-right: 10px;
-            }
+        .site-top img {
+            height: 100%;
+        }
 
-            .site-top > p {
-                color: #111111;
-                font-size: 13.5px;
-                margin-left: auto;
-                margin-right: 20px;
-                display: flex;
-                align-items: center; /* 수직 정렬 */
-            }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13.5px;
+        }
 
-            .site-top > p > span {
-                color: #646464;
-                text-decoration: underline;
-                margin-left: 30px;
-            }
+        .user-info img {
+            height: 32px;
+        }
 
-            .container {
-                display: flex;
-                align-items: flex-start;
-            }
+        .logout {
+            color: #646464;
+            text-decoration: underline;
+            margin-left: 30px;
+        }
 
-            .my-page {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start; /* 기본 정렬 왼쪽 */
-                position: relative;
-                width: 286.5px;
-                background-color: white;
-                margin: 40px 0 0 40px;
-                padding: 20px 20px 10px 20px;
-            }
+        /* TWL 이미지 스타일 추가 */
+        .TWL {
+            width: 70px;
+            height: 35px;
+            background-image: url('../static/logo.png');
+            background-size: cover;
+            color: white;
+            cursor: pointer;
+            margin: 0;
+            text-decoration: none;
+        }
 
-            .my-page > .my-page-text {
-                font-size: 16.5px;
-                color: #111111;
-                padding-top: 0;
-            }
+        .site-top p img {
+            height: 32px;
+            margin-right: 10px;
+        }
 
-            .my-page hr {
-                display: block;
-                width: 100%;
-                border: 0.5px solid #EEEBF7;
-                margin: 3px 0;
-            }
+        .site-top>p {
+            color: #111111;
+            font-size: 13.5px;
+            margin-left: auto;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            /* 수직 정렬 */
+        }
 
-            .my-page > p {
-                display: flex;
-                justify-content: space-between; /* 양쪽 정렬 */
-                align-items: center; /* 개별 요소 수직 정렬 */
-                font-size: 14px;
-                color: #2b2b2b;
-                padding: 10px 0;
-                margin: 0;
-                width: 100%;
-            }
+        .site-top>p>span {
+            color: #646464;
+            text-decoration: underline;
+            margin-left: 30px;
+        }
 
-            .my-page > p span:last-child {
-                margin-left: auto;
-                text-align: right;
-            }
+        .container {
+            display: flex;
+            align-items: flex-start;
+        }
 
-            .my-page > .pw-edit {
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-                color: #646464;
-                margin-top: 30px;
-                text-decoration: underline;
-            }
+        .my-page {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            /* 기본 정렬 왼쪽 */
+            position: relative;
+            width: 286.5px;
+            background-color: white;
+            margin: 40px 0 0 40px;
+            padding: 20px 20px 10px 20px;
+        }
 
-            .content {
-                margin: 35px 40px 0 40px;
-                width: 100%;
-            }
+        .my-page>.my-page-text {
+            font-size: 16.5px;
+            color: #111111;
+            padding-top: 0;
+        }
 
-            .content-list {
-                background-color: white;
-            }
+        .my-page hr {
+            display: block;
+            width: 100%;
+            border: 0.5px solid #EEEBF7;
+            margin: 3px 0;
+        }
 
-            .content-header {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
+        .my-page>p {
+            display: flex;
+            justify-content: space-between;
+            /* 양쪽 정렬 */
+            align-items: center;
+            /* 개별 요소 수직 정렬 */
+            font-size: 14px;
+            color: #2b2b2b;
+            padding: 10px 0;
+            margin: 0;
+            width: 100%;
+        }
 
-            .content-header > p {
-                display: inline-block;
-                font-size: 20px;
-                color: #111111;
-                margin: 0;
-            }
+        .my-page>p span:last-child {
+            margin-left: auto;
+            text-align: right;
+        }
 
-            .basic-btn {
-                border: none;
-                color: white;
-                font-size: 16.5px;
-                background-color: #5E2EED;
-                margin-right: 10px;
-                width: 87px;
-                height: 32px;
-            }
+        .my-page>.pw-edit {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            color: #646464;
+            margin-top: 30px;
+            text-decoration: underline;
+        }
 
-            .content-list > div > p {
-                font-size: 15px;
-                color: #2b2b2b;
-            }
+        .content {
+            margin: 35px 40px 0 40px;
+            width: 100%;
+        }
 
-            .content-list > div > p span {
-                color: #8B8B8B;
-            }
+        .content-list {
+            background-color: white;
+        }
 
-            .content-list hr {
-                border: 0.5px solid #EEEBF7;
-                margin: 0;
-            }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
 
-            .article {
-                display: flex;
-                justify-content: space-between; /* 양쪽 정렬 */
-                align-items: center; /* 개별 요소 수직 정렬 */
-                margin: 15px 25px;
-            }
-            .content-list tr {
-                border: 0.5px solid #EEEBF7;
-                margin: 0;
-            }
-            .page-list {
-                position: fixed;
-                bottom: 40px;
-                left: 50%; /* 수평 정렬 */
-                transform: translateX(-50%); /* 수평 정렬 */
-            }
+        .content-header>p {
+            display: inline-block;
+            font-size: 20px;
+            color: #111111;
+            margin: 0;
+        }
 
-            .page-num {
-                font-size: 15px;
-                color: #111111;
-                margin: 0 15px;
-                letter-spacing: 5px;
-            }
+        .basic-btn {
+            border: none;
+            color: white;
+            font-size: 16.5px;
+            background-color: #5E2EED;
+            margin-right: 10px;
+            width: 87px;
+            height: 32px;
+        }
 
-            .page-btn {
-                color: #BBBBBB;
-            }
+        .content-list>div>p {
+            font-size: 15px;
+            color: #2b2b2b;
+        }
 
-        </style>
+        .content-list>div>p span {
+            color: #8B8B8B;
+        }
 
-        <script>
-        </script>
-    </head>
-    <body>
-        <div class="site-top">
-            <!-- <a class="navbar-item" href="{{ url_for('main') }}">
+        .content-list hr {
+            border: 0.5px solid #EEEBF7;
+            margin: 0;
+        }
+
+        .article {
+            display: flex;
+            justify-content: space-between;
+            /* 양쪽 정렬 */
+            align-items: center;
+            /* 개별 요소 수직 정렬 */
+            margin: 15px 25px;
+        }
+
+        .content-list tr {
+            border: 0.5px solid #EEEBF7;
+            margin: 0;
+        }
+
+        .page-list {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            /* 수평 정렬 */
+            transform: translateX(-50%);
+            /* 수평 정렬 */
+        }
+    </style>
+
+    <script>
+    </script>
+</head>
+
+<body>
+    <div class="site-top">
+        <!-- <a class="navbar-item" href="{{ url_for('main') }}">
                 <h1 class="title is-4">TWL</h1>
               </a> -->
-            <!-- 수정 사항 : TWL 이미지 클릭시 main 접속-->
-            <a class="TWL " href="{{ url_for('main') }}"></a>
-            <div class="user-info">
-                <img src="../static/user.png" alt="사용자">
-                <span>{{ ID }}번 훈련생</span>
-                <span class="logout"><a href ="{{ url_for('logout')}}">로그아웃</a></span>
-            </div>
+        <!-- 수정 사항 : TWL 이미지 클릭시 main 접속-->
+        <a class="TWL " href="{{ url_for('main') }}"></a>
+        <div class="user-info">
+            <img src="../static/user.png" alt="사용자">
+            <span>{{ ID }}번 훈련생</span>
+            <span class="logout"><a href="{{ url_for('logout')}}">로그아웃</a></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="my-page">
+            <p class="my-page-text">마이 페이지</p>
+            <hr>
+            <p>
+                <span class="label-container">
+                    ▶ <span><a href="{{ url_for('showmine') }}">작성한 글</a></span>
+                </span>
+                <span>{{mst}}개</span>
+            </p>
+            <p>
+                <span class="label-container">
+                    ▶ <span><a href="{{ url_for('comentmine') }}">작성한 댓글</a></span>
+                </span>
+                <span>{{rst}}개</span>
+            </p>
+            <p class="pw-edit"><a href="{{ url_for('cpw') }}">비밀번호 수정</a></p>
         </div>
 
-        <div class="container">
-            <div class="my-page">
-                <p class="my-page-text">마이 페이지</p>
+        <div class="content">
+            <div class="content-header">
+                <p>TODAY WE LEARN</p>
+                <a href="{{url_for('make')}}"><button class="write-article basic-btn">글쓰기</button></a>
+            </div>
+            <div class="content-list">
+                {% for item in lessons %}
                 <hr>
-                <p>
-                    <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('showmine') }}">작성한 글</a></span>
-                    </span>
-                    <span>{{mst}}개</span>
-                </p>
-                <p>
-                    <span class="label-container">
-                        ▶ <span><a href ="{{ url_for('comentmine') }}">작성한 댓글</a></span>
-                    </span>
-                    <span>{{rst}}개</span>
-                </p>
-                <p class="pw-edit"><a href = "{{ url_for('cpw') }}">비밀번호 수정</a></p>
-            </div>
-            
-            <div class="content">
-                <div class="content-header">
-                    <p>TODAY WE LEARN</p>
-                    <a href="{{url_for('make')}}"><button class="write-article basic-btn" >글쓰기</button></a>
+                <div>
+                    <p class="article">
+                        <a href="{{ url_for('showup', id=item._id) }}">{{ item.title }}</a>
+                        <span>{{item.month}}월 {{item.day}}일</span>
+                    </p>
                 </div>
-                <div class = "content-list">
-                    {% for item in lessons %}
-                        <hr>
-                            <div>
-                                <p class="article">
-                                    <a href="{{ url_for('showup', id=item._id) }}">{{ item.title }}</a>
-                                    <span>{{item.month}}월 {{item.day}}일</span>
-                                </p>
-                            </div>
-                        <hr>    
-                    {% endfor %}
-                    
-                </div>
-            </div>
-        </div>
+                <hr>
+                {% endfor %}
 
-        <div class="page-list">
-            
+            </div>
         </div>
-    </body>
+    </div>
+
+    <div class="page-list">
+        <span><button type="button" class="btn">◀</button></span>
+        <span>
+            <button type="button" class="btn">1</button>
+            <button type="button" class="btn">2</button>
+            <button type="button" class="btn">3</button>
+            <button type="button" class="btn">4</button>
+            <button type="button" class="btn">5</button>
+            <button type="button" class="btn">6</button>
+            <button type="button" class="btn">7</button>
+            <button type="button" class="btn">8</button>
+            <button type="button" class="btn">9</button>
+
+        </span>
+        <span><button type="button" class="btn">▶</button></span>
+    </div>
+</body>
+
 </html>
