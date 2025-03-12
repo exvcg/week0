@@ -60,7 +60,7 @@ def login():
 
     # JWT 토큰 생성 (1시간 유효)
     access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=3))
-    response = make_response(redirect(url_for("main")))#return의 역할
+    response = make_response(redirect(url_for("page",number = 1)))#return의 역할
     response.set_cookie("access_token", access_token, httponly=True)#쿠키 설정
     return response
 @app.route('/logout', methods=['GET'])
@@ -109,7 +109,7 @@ def main():
 def page(number):
     current_user = get_jwt_identity()
     userd = db.users.find_one({"_id":ObjectId(current_user)})
-    elist = list(db.til.find().skip(10*(number-1)).limit(10).sort({'month':-1,'day':-1}))
+    elist = list(db.til.find().skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
     return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))    
