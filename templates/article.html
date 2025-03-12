@@ -333,7 +333,7 @@
                 <div class=".content-container-datgul">
                     <form method="POST" action="{{url_for('comment',lid = cont['_id'])}}">
                         <div class="registrate-com">
-                            <p id="wrap">{{datgul_num}}개의 댓글</p>
+                            <p id="wrap">{{comm|length}}개의 댓글</p>
                             <button class="registrate-btn basic-btn">등록</button>
                         </div>
                         <div style="display:none">
