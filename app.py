@@ -98,21 +98,18 @@ def showup(id):
 @app.route("/main")
 @jwt_required()
 def main():
-    current_user = get_jwt_identity()
-    userd = db.users.find_one({"_id":ObjectId(current_user)})
-    elist = list(db.til.find().skip(10).limit(10).sort({'month':-1,'day':-1}))
-    rlist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))
+    return redirect(url_for("page",number = 1))
 @app.route("/page/<number>")
 @jwt_required()
 def page(number):
+    sets = int(int(number)/10)
     current_user = get_jwt_identity()
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     elist = list(db.til.find().skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))    
+    pagenum = int(len(list(db.til.find()))/10) + 1
+    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist),nums = pagenum,set = sets)    
 @app.route("/showlist", methods=['GET'])#게시물리스트 가져오기
 @jwt_required()
 def showlist():
@@ -125,14 +122,16 @@ def showlist():
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
     return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))
-@app.route("/showmine", methods=['GET'])#내 게시물만 가져오기
+@app.route("/showmine/<number>", methods=['GET'])#내 게시물만 가져오기
 @jwt_required()
-def showmine():
+def showmine(number):
+    sets = int(int(number)/10)
     current_user = get_jwt_identity()
+    pagenum = int(len(list(db.til.find({'user': current_user})))/10) + 1
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
     dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"])
+    return render_template("after_login.html", lessons = dlist,mst = len(dlist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
 
 @app.route("/comment/<lid>", methods=['POST'])#댓글 구현
 @jwt_required()
