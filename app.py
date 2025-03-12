@@ -103,23 +103,23 @@ def page(number):
     sets = int(int(number)/10)
     current_user = get_jwt_identity()
     userd = db.users.find_one({"_id":ObjectId(current_user)})
-    elist = list(db.til.find().skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
+    elist = list(db.til.find().skip(10*(int(number)-1)).limit(10).sort({'_id': -1}))
     rlist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
+    dlist = list(db.til.find({'user': current_user}))
     pagenum = int((len(list(db.til.find()))-1)/10)+1
     return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist),nums = pagenum,set = sets)    
-@app.route("/showlist", methods=['GET'])#게시물리스트 가져오기
-@jwt_required()
-def showlist():
-    current_user = get_jwt_identity()
-    asd = list(db.ccc.find)
-    elist = list(db.til.find().sort({'month':-1,'day':-1}))
-    for ele in elist:
-        ele["_id"] = str(ele["_id"])
-    userd = db.users.find_one({"_id":ObjectId(current_user)})
-    rlist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
-    return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))
+# @app.route("/showlist", methods=['GET'])#게시물리스트 가져오기
+# @jwt_required()
+# def showlist():
+#     current_user = get_jwt_identity()
+#     asd = list(db.ccc.find)
+#     elist = list(db.til.find().sort({"_id":-1}))
+#     for ele in elist:
+#         ele["_id"] = str(ele["_id"])
+#     userd = db.users.find_one({"_id":ObjectId(current_user)})
+#     rlist = list(db.ccc.find({'user': current_user}))
+#     dlist = list(db.til.find({'user': current_user}))
+#     return render_template("after_login.html", lessons = elist,ID = userd["user_id"],mst = len(dlist), rst = len(rlist))
 @app.route("/showmine/<number>", methods=['GET'])#내 게시물만 가져오기
 @jwt_required()
 def showmine(number):
@@ -128,7 +128,7 @@ def showmine(number):
     pagenum = int((len(list(db.til.find({'user': current_user})))-1)/10) + 1
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     rlist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).skip(10*(int(number)-1)).limit(10).sort({'month':-1,'day':-1}))
+    dlist = list(db.til.find({'user': current_user}).skip(10*(int(number)-1)).limit(10).sort({"_id":-1}))
     elist = list(db.til.find({'user': current_user}))
     return render_template("after_login_mine.html", lessons = dlist,mst = len(elist), rst = len(rlist),ID = userd["user_id"],nums = pagenum,set = sets)
 
@@ -139,8 +139,6 @@ def comment(lid):
     Uid = get_jwt_identity()
     comments = {'lid': lid , 'content':com , 'user':Uid}
     db.ccc.insert_one(comments)
-    rlist = list(db.ccc.find({'user': Uid}))
-    dlist = list(db.til.find({'user': Uid}).sort({'month':-1,'day':-1}))
     return redirect(url_for("showup", id = lid))
 
 @app.route("/want/<id>", methods=['GET'])#내용변경요청
@@ -194,11 +192,11 @@ def comentmine():#내가 단 댓글 가져오기
     current_user = get_jwt_identity()
     userd = db.users.find_one({"_id":ObjectId(current_user)})
     elist = list(db.ccc.find({'user': current_user}))
-    dlist = list(db.til.find({'user': current_user}).sort({'month':-1,'day':-1}))
+    dlist = list(db.til.find({'user': current_user}).sort({"_id":-1}))
     return render_template("commentmine.html",coms = elist,mst = len(dlist), rst = len(elist),ID = userd["user_id"])
 @app.route("/cdelete/<id>")
 @jwt_required()
-def cdelete(id):#내가 단 댓글 가져오기
+def cdelete(id):#댓글 삭제
     lid = db.ccc.find_one({'_id':ObjectId(id)})
     db.ccc.delete_one({'_id':ObjectId(id)})
     return redirect(url_for("showup", id = lid["lid"]))
