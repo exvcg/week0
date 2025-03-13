@@ -57,7 +57,7 @@ def login():
         return render_template("login_page.html")
 
     # JWT 토큰 생성 (1시간 유효)
-    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=1))
+    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=7))
     response = make_response(redirect(url_for("page",number = 1)))#return의 역할
     response.set_cookie("access_token", access_token, httponly=True)#쿠키 설정
     return response
@@ -76,7 +76,6 @@ def make():
 @jwt_required()
 def listup():
     title = request.form['title']
-    userd = db.users.find_one({"_id":ObjectId(current_user)})
     if(title == ""):
         return redirect(url_for("main"))
     con = request.form['content']
@@ -87,9 +86,10 @@ def listup():
     month = now.month 
     day = now.day
     id = get_jwt_identity()
+    userd = db.users.find_one({"_id":ObjectId(id)})
     edu = {'title': title,'md':mcon,'content' : con ,'user': id, 'month': month, 'day' : day }
     result = db.til.insert_one(edu)
-    return redirect(url_for("main"))
+    return redirect(url_for("main",ID = userd["user_id"]))
 @app.route("/showup/<id>")#공부내용 가져오기
 @jwt_required()
 def showup(id):
