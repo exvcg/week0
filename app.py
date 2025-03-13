@@ -177,8 +177,8 @@ def cpw():
 def password():
     newPass = request.form["password"]
     check = request.form["check"]
-    print(newPass)
-    print(check)
+    if(newPass == ""):
+        return redirect(url_for("page",number = 1))
     if (newPass == check):
         id = get_jwt_identity()
         db.users.update_one({"_id":ObjectId(id)},{'$set': {'password': newPass}})
