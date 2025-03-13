@@ -216,6 +216,9 @@ def cdelete(id):#댓글 삭제
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
     return redirect(url_for("first"))
+@jwt.unauthorized_loader
+def unauthorized_callback(callback):
+    return redirect(url_for('first'))
 
 if __name__ == "__main__":
     app.run('0.0.0.0',port =5000,debug=True)    
