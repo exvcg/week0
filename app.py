@@ -57,7 +57,7 @@ def login():
         return render_template("login_page.html")
 
     # JWT 토큰 생성 (1시간 유효)
-    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=3))
+    access_token = create_access_token(identity=str(user["_id"]), expires_delta=datetime.timedelta(minutes=1))
     response = make_response(redirect(url_for("page",number = 1)))#return의 역할
     response.set_cookie("access_token", access_token, httponly=True)#쿠키 설정
     return response
@@ -160,7 +160,11 @@ def want(id):
 @jwt_required()
 def change(ids):
     title = request.form['title']
+    if(title == ""):
+        return redirect(url_for("showup",id = ids))
     content = request.form["content"]
+    if(content == ""):
+        return redirect(url_for("showup",id = ids))
     mcon = request.form['mcontent']
     result = db.til.update_one({"_id":ObjectId(ids)},{'$set': {'title':title ,'content': content,'md':mcon}})
     return redirect(url_for("showup",id = ids))
