@@ -8,7 +8,7 @@ import jwt
 import json
 app = Flask(__name__)
 
-client = MongoClient('localhost',27017)  # mongoDB는 27017 포트로 돌아갑니다.
+client = MongoClient('mongodb://test:test@52.79.227.155',27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbjungle  # 'dbjungle'라는 이름의 db를 만들거나 사용합니다.
 app.config["JWT_SECRET_KEY"] = "asedds"
 app.config["JWT_TOKEN_LOCATION"] = ["cookies"]  # JWT를 쿠키에 저장
@@ -218,4 +218,4 @@ def expired_token_callback(jwt_header, jwt_payload):
     return redirect(url_for("first"))
 
 if __name__ == "__main__":
-    app.run(debug=True)    
+    app.run('0.0.0.0',port =5000,debug=True)    
